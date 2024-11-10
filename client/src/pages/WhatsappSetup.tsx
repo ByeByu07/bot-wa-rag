@@ -18,7 +18,7 @@ const WhatsappSetup = ({ botId, onClose, onConnect }: WhatsappSetupProps) => {
 
   const checkStatus = async () => {
     try {
-      const response = await api.get(`/bots/${botId}/status`);
+      const response = await api.get(`api/bots/${botId}/status`);
       if (response.data.isActive) {
         setStatus('connected');
         onConnect?.();
@@ -39,7 +39,7 @@ const WhatsappSetup = ({ botId, onClose, onConnect }: WhatsappSetupProps) => {
   const initializeWhatsApp = async () => {
     try {
       setStatus('connecting');
-      const response = await api.post(`/bots/${botId}/initialize`);
+      const response = await api.post(`api/bots/${botId}/initialize`);
       
       if (response.data.qrCode) {
         setQrCode(response.data.qrCode);

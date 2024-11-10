@@ -1,28 +1,26 @@
-import { Schema, model, Document as MongooseDocument, Types } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
-// Interface for the document metadata
-interface DocumentMetadata {
-  uploadDate: Date;
-  fileSize: number;
-  processingStatus: string;
-}
-
-// Interface for the document
-export interface IDocument extends MongooseDocument {
-  userId: Types.ObjectId;
+export interface IDocument extends Document {
+  userId: string;
   fileName: string;
   fileType: string;
   content: string;
-  vectorId?: string;
-  metadata: DocumentMetadata;
+  fileUrl: string;
+  fileKey: string;
+  metadata: {
+    uploadDate: Date;
+    fileSize: number;
+    processingStatus: string;
+  };
 }
 
 const documentSchema = new Schema<IDocument>({
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: String, required: true },
   fileName: { type: String, required: true },
   fileType: { type: String, required: true },
   content: { type: String, required: true },
-  vectorId: String, // Reference to vector store
+  fileUrl: { type: String, required: true },
+  fileKey: { type: String, required: true },
   metadata: {
     uploadDate: { type: Date, default: Date.now },
     fileSize: Number,
@@ -30,4 +28,4 @@ const documentSchema = new Schema<IDocument>({
   }
 });
 
-export default model<IDocument>('Document', documentSchema); 
+export default mongoose.model<IDocument>('Document', documentSchema); 

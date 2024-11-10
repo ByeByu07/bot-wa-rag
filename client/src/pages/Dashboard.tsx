@@ -300,7 +300,10 @@ const Dashboard = () => {
                       <div className="relative group">
                         <Trash2 
                           className="h-5 w-5 text-red-500 hover:text-red-700 cursor-pointer transition-colors"
-                          onClick={() => handleDeleteBot(bot._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteBot(bot._id);
+                          }}
                         />
                         <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                           Delete this bot

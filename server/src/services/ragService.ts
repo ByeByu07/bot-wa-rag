@@ -8,9 +8,9 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY environment variable is not set');
-}
+// if (!process.env.OPENAI_API_KEY) {
+//   throw new Error('OPENAI_API_KEY environment variable is not set');
+// }
 
 interface DocumentMetadata {
   userId: string;
@@ -112,7 +112,7 @@ class RAGService {
           content: `Konteks:\n${context}\n\nPertanyaan: ${message}`
         }
       ]);
-
+      // @ts-ignore
       return { text: response.content };
     } catch (error) {
       console.error('Error in RAG query:', error);
